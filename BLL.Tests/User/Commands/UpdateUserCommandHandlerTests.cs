@@ -50,38 +50,5 @@ namespace BLL.Tests
                 WorkoutId = ContextFactory.WorkoutIdForUpdate,
             }, CancellationToken.None));
         }
-
-        [Fact]
-        public async Task UpdateUserCommandHandler_FailOnWrongClubPassId()
-        {
-            // Arrange
-            var handler = new UpdateUserCommandHandler(unitOfWork);
-
-            // Act
-            // Assert
-            await Assert.ThrowsAsync<NotFoundException>(async () =>
-            await handler.Handle(new UpdateUserCommand
-            {
-                Id = ContextFactory.UserIdForUpdate,
-                ClubPassId = Guid.NewGuid(),
-                WorkoutId = ContextFactory.WorkoutIdForUpdate
-            }, CancellationToken.None));
-        }
-        [Fact]
-        public async Task UpdateUserCommandHandler_FailOnWrongWorkoutId()
-        {
-            // Arrange
-            var handler = new UpdateUserCommandHandler(unitOfWork);
-
-            // Act
-            // Assert
-            await Assert.ThrowsAsync<NotFoundException>(async () =>
-            await handler.Handle(new UpdateUserCommand
-            {
-                Id = ContextFactory.UserIdForUpdate,
-                ClubPassId = ContextFactory.ClubPassIdForUpdate,
-                WorkoutId = Guid.NewGuid()
-            }, CancellationToken.None));
-        }
     }
 }

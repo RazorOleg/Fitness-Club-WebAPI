@@ -19,11 +19,7 @@ namespace CommandsAndQueries
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var clubPass = unitOfWork.ClubPasses.Get(request.ClubPassId);
-            if (clubPass == null)
-                throw new NotFoundException(nameof(ClubPass), request.ClubPassId);
             var workout = unitOfWork.Workouts.Get(request.WorkoutId);
-            if (workout == null)
-                throw new NotFoundException(nameof(ClubPass), request.ClubPassId);
             var user = await unitOfWork.Users.GetByIdAsync(request.Id, cancellationToken);
 
             if (user == null)
